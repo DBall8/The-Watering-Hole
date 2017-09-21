@@ -14,7 +14,7 @@ Assignment details
 
 Do the following to complete this assignment:
 
-1. Clone the [starting project code](https://github.com/cs4241-16b/A6-Events). **DO NOT FORK THE REPO and DO NOT MAKE IT PUBLIC.** This is not an extension of previous projects, though you are free to re-use code. 
+1. Fork the starting project code. DO NOT MAKE IT PUBLIC. This is not an extension of previous projects, though you are free to re-use code.
 2. One goal of this project is to experiment with Events: 
     * Add listeners for five different types of events.
     * Don't choose randomly from the MDN events list. Choose something cohesive.
