@@ -28,10 +28,40 @@ Do the following to complete this assignment:
     * At least one of the events should modify the DOM using `innerHTML` -- learn the difference between this and `innerText`.
 3. Deploy your project to Heroku.
     * Ensure that your project has the proper naming scheme (`cs4241-a6-yourGitHubUsername`) so we can find it.
-4. The project will be graded against the following rubric (120 total):
-    * 100: Fulfilling the requirements above
-    * 10: Good theming and layout
-    * 10: Technical Achievement: Have fun here! Check out advanced resources for some ideas. Don't forget to include an explanation of your achievement on your page.
-5. Include a README.md describing your technical achievement to recieve credit. 
-    * Your README.md should be served when an attempt to access `<your-url>/README.md` is made.
-    * Pay attention to capitalization of your filename -- it matters on git/heroku. Be sure to test that the readme is accessible from heroku.
+
+
+Technical achievements could be anything!
+Design achievements might focus on the consistent/smooth overall flow of various events, and innovative ways to trigger events.
+
+Note: Please do not push node_modules folder to git. (Do not remove it from .gitignore) If you are using an external library, please add the library in package.json. Heroku loads the library from there. 
+
+Naming and URL Scheme
+---
+
+You must use a consistent naming scheme for all projects in this course.
+If we can't find it, we can't grade it.
+
+By default Heroku assigns your application a random name.
+To change it, follow [this guide](https://devcenter.heroku.com/articles/renaming-apps).
+
+The name scheme should be `a6-yourGitHubUsername`.
+
+Resources
+---
+
+Beyond the class code, look for sources on using node with sqlite.
+
+Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
+---
+
+Lane Harrison  
+http://aX-codementum.herokuapp.com
+
+This project shows ...
+
+## Technical Achievements
+- **Proved P=NP**: Using a combination of...
+- **Solved AI**: ...
+
+### Design Achievements
+- **Re-vamped Apple's Design Philosophy**: Shown in `style.css`, the code...
