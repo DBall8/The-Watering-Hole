@@ -4,6 +4,7 @@ var http = require('http')
   , url = require('url')
   , port = 8080
 
+var player = {x: 100, y: 100};
 
 // create the server
 var server = http.createServer(function (req, res) {
@@ -12,10 +13,12 @@ var server = http.createServer(function (req, res) {
 
   // handle url file paths
   switch (uri.pathname) {
- 
+    case '/frame':
+        handleFrame(req, res);
+        break;
     case '/':
-          sendFile(res, 'index.html', 'text/html')
-          break
+        sendFile(res, 'index.html', 'text/html')
+        break
     case '/index.html':
         sendFile(res, 'index.html', 'text/html')
         break
@@ -30,6 +33,16 @@ var server = http.createServer(function (req, res) {
   }
 
 })
+
+function handleFrame(req, res){
+  player.x++;
+  player.y++;
+
+
+  res.writeHead(200, {'Content-type': 'application/json'})
+  res.end(JSON.stringify(player));
+
+}
 
 server.listen(process.env.PORT || port)
 console.log('listening on 8080')
