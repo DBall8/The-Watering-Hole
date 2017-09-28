@@ -1,24 +1,30 @@
-﻿<!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <title>My Tasks List</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="script.js"></script>
-    <title>WHISH</title>
 </head>
 <body>
-    <h1>W.H.I.S.H.</h1>
-    <br />
-    <h2>Where Have I Seen Him/Her Before?</h2>
-    <div id="movieDiv">
-        <h3>What movie/show are you watching?</h3>
-    </div>
-    <div id="characterDiv">
-        <h3>What character is familiar?</h3>
-    </div>
-    <div id="resultsDiv">
-        <h3>They've been in:</h3>
+    <div id="maindiv">
+        <h1>To Do:</h1>
+        <div id="tasksdiv">
+
+        </div>
+        <form name="newtask" method="POST">
+            <label for="task">New Task: </label>
+            <input type="text" name="task" />
+            <br />
+            <div id="hiddenform">
+                <label for="notes">Notes: </label><br />
+                <textarea rows="10" cols="100" name="notes"></textarea>
+                <br />
+                <label for="deadline">Deadline: </label><br />
+                <input type="text" name="deadline" />
+
+                <button type="button" name="add" onclick="addTask()">Add Task</button>
+            </div>
+        </form>
     </div>
 </body>
 </html>

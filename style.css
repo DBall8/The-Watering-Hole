@@ -1,19 +1,26 @@
-div {
-    width: 30%;
+.task{
     display: block;
-    
+    width: 100%;
+}
+
+h2{
+    width: 30%;
+    display: inline;
+}
+
+.deadline {
+    width: 70%;
+    display: inline;
+}
+
+.notes{
+    display: none;
+}
+
+div{
     border: 2px solid black;
 }
 
-#movieDiv{
-    float: left;
-}
-
-#characterDiv {
-    margin: auto;
-}
-
-#resultsDiv{
-    float: right;
-    clear: none;
+#hiddenform{
+    display: none;
 }
