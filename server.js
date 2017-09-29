@@ -3,8 +3,7 @@ var http = require('http')
     , fs = require('fs')
     , url = require('url')
     , sql = require('sqlite3')
-    , port = 8081
-
+    , port = 8080
 
 // open database
 var db = new sql.Database('tasks.db', sql.OPEN_READWRITE, function (err) {
@@ -24,6 +23,13 @@ var server = http.createServer(function (req, res) {
     switch (uri.pathname) {
         case '/add':
             addTask(req, res);
+            break;
+        case '/delete':
+            deleteTask(req, res);
+            break;
+        case '/update':
+            updateTask(req, res);
+            break;
         case '/tasks':
             sendTasks(req, res);
             break;
@@ -40,11 +46,10 @@ var server = http.createServer(function (req, res) {
             sendFile(res, 'script.js', 'text/javascript')
             break
         default:
-
             res.end(uri.pathname + ' 404 not found')
     }
+});
 
-})
 
 server.listen(process.env.PORT || port)
 console.log('listening on 8080')
@@ -72,6 +77,33 @@ function addTask(req, res) {
         var newtask = JSON.parse(data);
         db.run('INSERT INTO tasks VALUES ("' + newtask.title + '", "' + newtask.notes + '", "' + newtask.deadline + '")');
         sendTasks(req, res);
+    });
+}
+
+function deleteTask(req, res) {
+    var data = '';
+    req.on('data', function (d) {
+        data += d;
+    });
+
+    req.on('end', function () {
+        db.run('DELETE FROM tasks WHERE title=(?)', data);
+        sendTasks(req, res);
+    });
+}
+
+function updateTask(req, res) {
+    var data = '';
+    req.on('data', function (d) {
+        data += d;
+    });
+
+    req.on('end', function () {
+        var post = qs.parse(data);
+        if (post.title && post.newnotes) {
+            db.run("UPDATE tasks SET notes=(?) WHERE title=(?)", post.newnotes, post.title);
+            sendTasks(req, res);
+        } 
     });
 }
 
