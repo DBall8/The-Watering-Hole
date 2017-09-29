@@ -5,15 +5,7 @@ var http = require('http')
     , sql = require('sqlite3')
     , port = 8080
 
-// open database
-var db = new sql.Database('tasks.db', sql.OPEN_READWRITE, function (err) {
-    if (err) {
-        console.error("Error: could not create database.");
-    }
-    else {
-        console.log("Connected to movies database.")
-    }
-});
+var db;
 
 // create the server
 var server = http.createServer(function (req, res) {
@@ -33,6 +25,9 @@ var server = http.createServer(function (req, res) {
         case '/tasks':
             sendTasks(req, res);
             break;
+        case '/login':
+            handleLogin(req, res);
+            break;
         case '/':
             sendFile(res, 'index.html', 'text/html')
             break
@@ -50,9 +45,52 @@ var server = http.createServer(function (req, res) {
     }
 });
 
+function createDB(username) {
+
+    db = new sql.Database(username + '.db');
+    db.run('CREATE TABLE tasks (title varchar(255), notes varchar(800), deadline varchar(255))');
+}
+
+function loadDB(username) {
+    // open database
+    db = new sql.Database(username + '.db', sql.OPEN_READWRITE, function (err) {
+        if (err) {
+            console.error("Error: could not load database.");
+        }
+        else {
+            console.log("Connected to movies database.")
+        }
+    });
+}
+
 
 server.listen(process.env.PORT || port)
 console.log('listening on 8080')
+
+function handleLogin(req, res) {
+    var data = '';
+    req.on('data', function (d) {
+        data += d;
+    });
+
+    req.on('end', function () {
+        var post = qs.parse(data);
+
+        if (post.username == 'Damon') {
+            loadDB('tasks');
+        }
+        else if (post.newuser == 1) {
+            createDB(post.username);
+        }
+        else {
+            loadDB(post.username);
+        }
+
+
+        sendFile(res, 'main.html', 'text/html');
+    });
+    
+}
 
 function sendTasks(req, res) {
     var result = [];

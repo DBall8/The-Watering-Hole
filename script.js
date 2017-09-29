@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         
     })
+
+    history.replaceState(null, "To Do", "/main");
 })
 
 
