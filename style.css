@@ -1,5 +1,4 @@
 body {
-    margin: auto;
     background: #000000;
     color: #6ad6ff;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -9,7 +8,14 @@ pre {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#title {
+h2{
+    width: 30%;
+    display: inline;
+    margin: 20px;
+}
+
+
+.title {
     font-size: 3em;
     color: #6ad6ff;
     width: 50%;
@@ -17,13 +23,6 @@ pre {
     margin: auto;
     padding: 20px;
 }
-
-h2{
-    width: 30%;
-    display: inline;
-    margin: 20px;
-}
-
 
 .task {
     background: #58a3c0;
@@ -83,6 +82,7 @@ h2{
     display: none;
 }
 
-#tasksdiv{
-    
+.centerdiv{
+    width: 50%;
+    margin: 200px auto;
 }

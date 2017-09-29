@@ -4,21 +4,23 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        /*document.addEventListener('DOMContentLoaded', function () {
             var cookies = document.cookie;
             var cookies = cookies.split('; ');
             for (var i = 0; i < cookies.length; i++) {
                 var c = (cookies[i]).split('=');
                 console.log(c);
                 if (c[0] == 'username') {
+                    if (c[1] = '') {
+                        return;
+                    }
                     var form = document.getElementById("signinform");
-                    var inputs = form.getElementsByTagName("input");
+                    var inputs = document.getElementsByName("username");
                     inputs[0].value = c[1];
-                    inputs[1].value = "0";
                     form.submit();
                 }
             }
-        })
+        })*/
 
         function showcookies() {
             var cookies = document.cookie;
@@ -29,29 +31,25 @@
         function mysubmit() {
             var form = document.getElementById("signinform");
             var username = form.getElementsByTagName("input")[0].value;
+            if (username == '') {
+                alert("Please enter a username.");
+                return;
+            }
             document.cookie = "username=" + username;
             form.submit();
         }
-
-        // handle response from XMLHttp request
-        function handle_res() {
-            if (this.readyState != 4) {
-                return;
-            }
-            if (this.status == 200) {
-                alert(this.responseText);
-            }
-        };
     </script>
 </head>
 <body>
-    <h1>Sign In</h1>
-    <form id="signinform" action="login" method="POST">
-        <label for="username">Username: </label><br />
-        <input name="username" />
-        <input type="hidden" name="newuser" value="1" />
-        <button type="button" onclick="mysubmit()">Log in</button>
-    </form>
-    <button onclick="showcookies()">SHow Coookies</button>
+    <div class="centerdiv">
+        <h1>Sign In</h1>
+
+        <form id="signinform" action="login" method="POST">
+            <label for="username">Username: </label><br />
+            <input name="username" />
+            <button type="button" onclick="mysubmit()">Log in</button>
+        </form>
+        <button onclick="showcookies()">SHow Coookies</button>
+    </div>
 </body>
 </html>

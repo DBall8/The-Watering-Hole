@@ -28,6 +28,9 @@ var server = http.createServer(function (req, res) {
         case '/login':
             handleLogin(req, res);
             break;
+        case '/logout':
+            sendFile(res, 'index.html', 'text/html')
+            break;
         case '/':
             sendFile(res, 'index.html', 'text/html')
             break
@@ -55,7 +58,7 @@ function loadDB(username) {
     // open database
     db = new sql.Database(username + '.db', sql.OPEN_READWRITE, function (err) {
         if (err) {
-            console.error("Error: could not load database.");
+            createDB(username);
         }
         else {
             console.log("Connected to movies database.")
@@ -74,19 +77,11 @@ function handleLogin(req, res) {
     });
 
     req.on('end', function () {
+        console.log("Received: " + data);
         var post = qs.parse(data);
 
-        if (post.username == 'Damon') {
-            loadDB('tasks');
-        }
-        else if (post.newuser == 1) {
-            createDB(post.username);
-        }
-        else {
-            loadDB(post.username);
-        }
-
-
+        loadDB(post.username);
+     
         sendFile(res, 'main.html', 'text/html');
     });
     
