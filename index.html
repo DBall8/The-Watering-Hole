@@ -32,7 +32,7 @@
                 return;
             }
             // sets cookie and send login in query
-            document.cookie = "username=" + username;
+            document.cookie = "username=" + username + ";expires=Thu, 01 Dec 2018 00:00:01 GMT";
             form.submit();
         }
     </script>
