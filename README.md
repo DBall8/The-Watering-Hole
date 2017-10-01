@@ -1,52 +1,49 @@
-Assignment 6 - Events
-===
-
-You are now skilled in the art of sending data from client to server and vice-versa.
-
-Now, to really move into Web 2.0 land, your web-pages should become more interactive, responding to user input and other events in various ways.
-
-Luckily modern browsers implement a huge number of Events you can leverage while designing your site.
-
-In this assignment, you will experiment with a number of events and techniques for manipulating HTML on the client side.
-
-Assignment details
----
-
-Do the following to complete this assignment:
-
-1. Fork the starting project code. DO NOT MAKE IT PUBLIC. This is not an extension of previous projects, though you are free to re-use code.
-2. One goal of this project is to experiment with Events: 
-    * Add listeners for five different types of events.
-    * Don't choose randomly from the MDN events list. Choose something cohesive.
-    * To show your work, add a bulleted list to your README explaining what event you used and how. A simple example:
-        * "`click`: Used on the Tweet divs, the `click` event un-hides a menu div"
-    * One of the events **must** be set with `onclick` rather than `addEventListener`. Think about why you might want to use one over the other, since `addEventListener` can essentially do the same as `onclick` if you specify tell it to use the `click` event. Documentation for `onclick` is [here on MDN](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick)
-3. A second goal of this project is to become familiar with several methods of manipulating the DOM:
-    * One of your events should hide an element, using the `display` CSS property.
-    * One of your events should reveal a hidden element.
-    * At least one of the events should modify the DOM using `innerText`
-    * At least one of the events should modify the DOM using `innerHTML` -- learn the difference between this and `innerText`.
-3. Deploy your project to Heroku.
-    * Ensure that your project has the proper naming scheme (`a6-yourGitHubUsername`) so we can find it.
+Damon Ball  
+http://a6-dball8.herokuapp.com/
 
 
-Technical achievements could be many things- use the event design space as your starting point.
-Design achievements might focus on the consistent/smooth overall flow of various events, innovative ways to trigger events, animation, or others.
+**IMPORTANT NOTE FOR GRADERS**
+I have included a sample account of a filled in page of tasks. Simply use the login "tasks" on the
+login screen to go to this page.
 
-__Note: Please do not push the node_modules folder to git. (Do not remove it from .gitignore, if you don't have a .gitignore, make one and add node_modules to it) If you are using an external library, please add the library in package.json. Heroku loads the library from there.__
+This project shows the ability to use event listeners to create an interactive web page.
 
+The page is a task list for users to store tasks that they have to complete. Each task has a title and
+a due date listed. When a task is selected, it also displays a notes section that can be used for
+storing the steps needed to complete a task or general notes that could be useful for its completion.
+There is also a "Completed" button to click when the task is finished, which simply deletes the task.
+The notes can be edited inline by double clicking them, and a new task can be added by typing in
+the field at the bottom of the page.
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+The included events are as follow:
+	- keydown: pressing the up arrow or down arrow scrolls through the tasks
+	- mouseenter: when a mouse enters a task div, it highlights the div
+	- mouseleave: when a mouse leaves a task div, it removes the highlight from the div
+	- onclick: when a task div is clicked, it selects that task div (implemented with onclick)
+		- click: a few buttons (like the save button and the completed button) use click event listeners
+	- dblclick: when a task's notes are double clicked, it switches to a text area input
+		field for inline editing of the note
+	- DOMContentLoaded: when the document is finished loading, it asks the server for all the tasks
+		and displays the tasks
 
-Lane Harrison  
-http://aX-codementum.herokuapp.com
-
-This project shows ...
+The dblclick event uses textContent to set the value of the text area field to be the notes of the task
+when it is displayed.
+When the document loads and creates all the tasks, it uses innerHTML as a easier way to create the
+elements to be displayed.
 
 ## Technical Achievements
-- **Proved P=NP**: Using a combination of...
-- **Solved AI**: ...
+- **Used cookies to store user sessions**: When first coming to the page, a login screen is encountered
+instead of a list of tasks. When the user gives a login, it creates a database of tasks for that username
+and stores a cookie with the username. While the cookie is present, any time the user visits the page or
+reloads the page it will immediately take them to their tasks instead of the login screen. To wipe the
+cookie the user must click logout, which brings them back to the login screen.
+NOTE: There is no password so anybody can edit anybody else's task list.
 
 ### Design Achievements
-- **Re-vamped Apple's Design Philosophy**: Shown in `style.css`, the code...
+- **Used complementary colors**: The choice of a orange background and blue task items was to use 
+complementary colors and make the page looking appealing.
+- **The add form hides when not in use**: So as to save space on the screen and not confuse the user,
+the add a new task form only appears when the user starts to create the new task (types in the new task
+field).
+- **Tasks highlight when moused over**: To make it more apparent that the tasks can be clicked on, the
+tasks will highlight when the mouse moves over them indication that there is an interaction.
