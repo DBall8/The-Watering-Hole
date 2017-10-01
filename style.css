@@ -67,6 +67,11 @@ h2{
     margin: 10px 60px auto 5px;
 }
 
+.centerdiv {
+    width: 50%;
+    margin: 200px auto;
+}
+
 #maindiv {
     background: #e1b27e;
     color: #000000;
@@ -80,9 +85,4 @@ h2{
 
 #hiddenform {
     display: none;
-}
-
-.centerdiv{
-    width: 50%;
-    margin: 200px auto;
 }

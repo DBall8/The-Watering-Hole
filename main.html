@@ -6,20 +6,28 @@
     <script src="script.js"></script>
 </head>
 <body>
+    <!-- Logout button -->
     <form id="logout" method="POST" action="logout" style="float:right;">
         <button type="button" onclick="logout()">Log Out</button>
     </form>
+
+    <!-- Main Body -->
     <h1 class="title">Interactive To Do List</h1>
     
     <div id="maindiv">
         <h1>To Do:</h1>
-        <div id="tasksdiv">
 
+        <!-- tasks will fin in inside this div -->
+        <div id="tasksdiv">
+            
         </div>
+
+        <!-- Form for adding new tasks -->
         <form name="newtask" method="POST">
             <label for="task">New Task: </label>
             <input type="text" name="task" />
             <br />
+            <!-- hidden portion that appears when typing in to text input -->
             <div id="hiddenform">
                 <label for="notes">Notes: </label><br />
                 <textarea rows="10" cols="100" name="notes"></textarea>

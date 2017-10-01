@@ -13,23 +13,22 @@ var server = http.createServer(function (req, res) {
 
     // handle url file paths
     switch (uri.pathname) {
-        case '/add':
+        case '/add': // for adding a task
             addTask(req, res);
             break;
-        case '/delete':
+        case '/delete': // for deleting a task
             deleteTask(req, res);
             break;
-        case '/update':
+        case '/update': // for updating a task
             updateTask(req, res);
             break;
-        case '/tasks':
+        case '/get': // gets all tasks
             sendTasks(req, res);
             break;
-        case '/login':
-            handleLogin(req, res);
-            break;
-        case '/logout':
-            sendFile(res, 'index.html', 'text/html')
+        case '/login': // for logging a user in
+            // get the username from the GET query
+            var q = qs.parse(uri.query) 
+            handleLogin(res, q.username);
             break;
         case '/':
             sendFile(res, 'index.html', 'text/html')
@@ -48,12 +47,18 @@ var server = http.createServer(function (req, res) {
     }
 });
 
+server.listen(process.env.PORT || port)
+console.log('listening on 8080')
+
+
+// initializes a new database for a new user
 function createDB(username) {
 
     db = new sql.Database(username + '.db');
     db.run('CREATE TABLE tasks (title varchar(255), notes varchar(800), deadline varchar(255))');
 }
 
+// loads the user base for the given user. If none exists than create a new one.
 function loadDB(username) {
     // open database
     db = new sql.Database(username + '.db', sql.OPEN_READWRITE, function (err) {
@@ -61,32 +66,20 @@ function loadDB(username) {
             createDB(username);
         }
         else {
-            console.log("Connected to movies database.")
+            console.log("Connected to database for User: " + username)
         }
     });
 }
 
-
-server.listen(process.env.PORT || port)
-console.log('listening on 8080')
-
-function handleLogin(req, res) {
-    var data = '';
-    req.on('data', function (d) {
-        data += d;
-    });
-
-    req.on('end', function () {
-        console.log("Received: " + data);
-        var post = qs.parse(data);
-
-        loadDB(post.username);
-     
+// on login, loads the user's tasks database and sends the main.html page
+function handleLogin(res, username) {
+    if (username != '') {
+        loadDB(username);
         sendFile(res, 'main.html', 'text/html');
-    });
-    
+    }
 }
 
+// sends all tasks as a JSON
 function sendTasks(req, res) {
     var result = [];
 
@@ -100,6 +93,7 @@ function sendTasks(req, res) {
 
 }
 
+// adds a task to the database
 function addTask(req, res) {
     var data = '';
     req.on('data', function (d) {
@@ -113,6 +107,7 @@ function addTask(req, res) {
     });
 }
 
+// deletes a task from the database
 function deleteTask(req, res) {
     var data = '';
     req.on('data', function (d) {
@@ -125,6 +120,7 @@ function deleteTask(req, res) {
     });
 }
 
+// updates the notes section of a task in the database
 function updateTask(req, res) {
     var data = '';
     req.on('data', function (d) {
@@ -140,6 +136,7 @@ function updateTask(req, res) {
     });
 }
 
+// sends a page
 function sendFile(res, filename, contentType) {
     contentType = contentType || 'text/html'
 
