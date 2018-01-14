@@ -1,5 +1,5 @@
 Damon Ball
-https://a7-dball8.herokuapp.com/
+http://thewateringhole.herokuapp.com/
 
 This projects show an implementation of an anonymous online web chat application. 
 The application consists of Discussion Threads, which are pages containing posts from users.
